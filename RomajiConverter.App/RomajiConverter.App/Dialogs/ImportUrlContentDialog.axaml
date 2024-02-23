@@ -1,0 +1,20 @@
+<controls:ContentDialog xmlns="https://github.com/avaloniaui"
+                xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                xmlns:controls="clr-namespace:FluentAvalonia.UI.Controls;assembly=FluentAvalonia"
+                xmlns:dialogs="clr-namespace:RomajiConverter.App.Dialogs"
+                mc:Ignorable="d"
+                x:Class="RomajiConverter.App.Dialogs.ImportUrlContentDialog"
+                x:DataType="dialogs:ImportUrlContentDialog"
+                Title="通过链接导入歌词"
+                PrimaryButtonText="确认"
+                CloseButtonText="取消"
+                DefaultButton="Primary">
+    <StackPanel>
+        <TextBlock Margin="0,8" Text="目前支持网易云、QQ音乐、酷狗" />
+        <TextBlock Margin="0,8" Text="歌曲分享链接：" />
+        <TextBox x:Name="UrlTextBox" Margin="0,8,0,0" TextWrapping="Wrap" TextChanging="TextBox_OnTextChanging" AttachedToVisualTree="UrlTextBox_OnAttachedToVisualTree" />
+        <TextBlock x:Name="ErrorTextBox" Margin="0,4" Foreground="#C42B1C"/>
+    </StackPanel>
+</controls:ContentDialog>

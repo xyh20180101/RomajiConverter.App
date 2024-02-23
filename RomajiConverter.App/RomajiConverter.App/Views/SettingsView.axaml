@@ -1,0 +1,182 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:controls="clr-namespace:RomajiConverter.App.Controls"
+             xmlns:app="clr-namespace:RomajiConverter.App"
+             xmlns:models="clr-namespace:RomajiConverter.App.Models"
+             xmlns:valueConverters="clr-namespace:RomajiConverter.App.ValueConverters"
+             xmlns:progRing="clr-namespace:AvaloniaProgressRing;assembly=AvaloniaProgressRing"
+             mc:Ignorable="d"
+             x:Class="RomajiConverter.App.Views.SettingsView"
+             Loaded="Control_OnLoaded"
+             Unloaded="Control_OnUnloaded">
+	<UserControl.Resources>
+		<valueConverters:HexStringToAvaloniaColorValueConverter x:Key="AvaloniaColorValueConverter"></valueConverters:HexStringToAvaloniaColorValueConverter>
+		<valueConverters:DoubleToStringValueConverter x:Key="DoubleToStringValueConverter"></valueConverters:DoubleToStringValueConverter>
+	</UserControl.Resources>
+	<StackPanel Orientation="Vertical">
+		<TextBlock Margin="8,0,4,4" FontWeight="SemiBold" Text="生成图片选项" />
+
+		<controls:SettingsCard Glyph="&#xE8D2;" Header="字体" Margin="4">
+			<controls:SettingsCard.Content>
+				<ComboBox x:Name="FontFamilyComboBox">
+                </ComboBox>
+			</controls:SettingsCard.Content>
+		</controls:SettingsCard>
+
+		<controls:SettingsCard Glyph="&#xE8D3;" Header="字体颜色" Margin="4">
+			<controls:SettingsCard.Content>
+				<StackPanel Orientation="Horizontal">
+					<ColorPicker x:Name="FontColorPicker"
+								  IsHexInputVisible="False"
+								  IsAlphaEnabled="True"
+								  Color="{Binding FontColor,Mode=TwoWay,Source={x:Static app:App.Config},DataType=models:MyConfig,Converter={StaticResource AvaloniaColorValueConverter}}" />
+					<TextBox x:Name="FontColorTextBox" Margin="4,0,0,0" TextWrapping="Wrap" MaxLength="9" Width="100"
+							 Text="{Binding FontColor,Mode=TwoWay,Source={x:Static app:App.Config},DataType=models:MyConfig}"
+							 LostFocus="FontColorTextBox_OnLostFocus" />
+				</StackPanel>
+			</controls:SettingsCard.Content>
+		</controls:SettingsCard>
+
+		<controls:SettingsCard Glyph="&#xE790;" Header="背景颜色" Margin="4">
+			<controls:SettingsCard.Content>
+				<StackPanel Orientation="Horizontal">
+					<ColorPicker x:Name="BackgroundColorPicker"
+								 IsHexInputVisible="True"
+								 IsAlphaEnabled="False"
+								 Color="{Binding BackgroundColor,Mode=TwoWay,Source={x:Static app:App.Config},DataType=models:MyConfig,Converter={StaticResource AvaloniaColorValueConverter}}" />
+					<TextBox x:Name="BackgroundColorTextBox" Margin="4,0,0,0" TextWrapping="Wrap" MaxLength="9" Width="100"
+							 Text="{Binding BackgroundColor,Mode=TwoWay,Source={x:Static app:App.Config},DataType=models:MyConfig}"
+							 LostFocus="BackgroundColorTextBox_OnLostFocus" />
+				</StackPanel>
+			</controls:SettingsCard.Content>
+		</controls:SettingsCard>
+
+		<controls:SettingsCard Glyph="&#xE8E9;" Header="字体大小" Margin="4">
+			<controls:SettingsCard.Content>
+				<StackPanel Orientation="Horizontal">
+					<Slider x:Name="FontPixelSizeSlider" Margin="0,0,8,0" IsSnapToTickEnabled="True"
+							TickFrequency="1" Minimum="20" Maximum="72" Width="100"
+							Value="{Binding FontPixelSize,Mode=TwoWay,Source={x:Static app:App.Config},DataType=models:MyConfig}" />
+					<TextBox x:Name="FontPixelSizeTextBox" Text="{Binding Value,Mode=TwoWay,ElementName=FontPixelSizeSlider}"
+							 VerticalAlignment="Center" TextWrapping="Wrap" MaxLength="3" />
+				</StackPanel>
+			</controls:SettingsCard.Content>
+		</controls:SettingsCard>
+
+		<controls:SettingsCard Glyph="&#xF573;" Header="页面内边距" Margin="4">
+			<controls:SettingsCard.Content>
+				<StackPanel Orientation="Horizontal">
+					<Slider x:Name="PagePaddingSlider" Margin="0,0,8,0" IsSnapToTickEnabled="True"
+							TickFrequency="1" Minimum="0" Maximum="100" Width="100"
+							Value="{Binding PagePadding,Mode=TwoWay,Source={x:Static app:App.Config},DataType=models:MyConfig}" />
+					<TextBox x:Name="PagePaddingTextBox" Text="{Binding Value,Mode=TwoWay,ElementName=PagePaddingSlider}"
+							 VerticalAlignment="Center" TextWrapping="Wrap" MaxLength="3" />
+				</StackPanel>
+			</controls:SettingsCard.Content>
+		</controls:SettingsCard>
+
+		<controls:SettingsCard Glyph="&#xE799;" Header="字间距" Margin="4">
+			<controls:SettingsCard.Content>
+				<StackPanel Orientation="Horizontal">
+					<Slider x:Name="TextMarginSlider" Margin="0,0,8,0" IsSnapToTickEnabled="True"
+							TickFrequency="1" Minimum="0" Maximum="100" Width="100"
+							Value="{Binding TextMargin,Mode=TwoWay,Source={x:Static app:App.Config},DataType=models:MyConfig}" />
+					<TextBox x:Name="TextMarginTextBox" Text="{Binding Value,Mode=TwoWay,ElementName=TextMarginSlider}"
+							 VerticalAlignment="Center" TextWrapping="Wrap" MaxLength="3" />
+				</StackPanel>
+			</controls:SettingsCard.Content>
+		</controls:SettingsCard>
+
+        <controls:SettingsCard Glyph="&#xE799;" Header="词间距" Margin="4">
+            <controls:SettingsCard.Content>
+                <StackPanel Orientation="Horizontal">
+                    <Slider x:Name="WordMarginSlider" Margin="0,0,8,0" IsSnapToTickEnabled="True"
+                            TickFrequency="0.1" Minimum="0" Maximum="1" Width="100"
+                            Value="{Binding WordMargin,Mode=TwoWay,Source={x:Static app:App.Config},DataType=models:MyConfig}" />
+                    <TextBox x:Name="WordMarginTextBox" Text="{Binding Value,Mode=TwoWay,ElementName=WordMarginSlider,Converter={StaticResource DoubleToStringValueConverter}}"
+                             VerticalAlignment="Center" TextWrapping="Wrap" MaxLength="3" />
+                </StackPanel>
+            </controls:SettingsCard.Content>
+        </controls:SettingsCard>
+
+		<controls:SettingsCard Glyph="&#xEA37;" Header="行外边距" Margin="4">
+			<controls:SettingsCard.Content>
+				<StackPanel Orientation="Horizontal">
+					<Slider x:Name="LineMarginSlider" Margin="0,0,8,0" IsSnapToTickEnabled="True"
+							TickFrequency="1" Minimum="0" Maximum="100" Width="100"
+							Value="{Binding LineMargin,Mode=TwoWay,Source={x:Static app:App.Config},DataType=models:MyConfig}" />
+					<TextBox x:Name="LineMarginTextBox" Text="{Binding Value,Mode=TwoWay,ElementName=LineMarginSlider}"
+							 VerticalAlignment="Center" TextWrapping="Wrap" MaxLength="3" />
+				</StackPanel>
+			</controls:SettingsCard.Content>
+		</controls:SettingsCard>
+
+		<controls:SettingsCard Glyph="&#xEA37;" Header="行内边距" Margin="4">
+			<controls:SettingsCard.Content>
+				<StackPanel Orientation="Horizontal">
+					<Slider x:Name="LinePaddingSlider" Margin="0,0,8,0" IsSnapToTickEnabled="True"
+							TickFrequency="1" Minimum="0" Maximum="100" Width="100"
+							Value="{Binding LinePadding,Mode=TwoWay,Source={x:Static app:App.Config},DataType=models:MyConfig}" />
+					<TextBox x:Name="LinePaddingTextBox" Text="{Binding Value,Mode=TwoWay,ElementName=LinePaddingSlider}"
+							 VerticalAlignment="Center" TextWrapping="Wrap" MaxLength="3" />
+				</StackPanel>
+			</controls:SettingsCard.Content>
+		</controls:SettingsCard>
+
+		<controls:SettingsCard x:Name="IsOpenExplorerAfterSaveImageSettingsCard" Glyph="&#xE838;" Header="生成图片后打开文件夹" Margin="4">
+			<controls:SettingsCard.Content>
+				<StackPanel Orientation="Horizontal">
+					<ToggleSwitch x:Name="IsOpenExplorerAfterSaveImageToggleSwitch"
+								  IsChecked="{Binding IsOpenExplorerAfterSaveImage,Mode=TwoWay,Source={x:Static app:App.Config},DataType=models:MyConfig}" >
+					</ToggleSwitch>
+				</StackPanel>
+			</controls:SettingsCard.Content>
+		</controls:SettingsCard>
+
+		<TextBlock Margin="8,32,4,4" FontWeight="SemiBold" Text="生成文本选项" />
+
+		<controls:SettingsCard Glyph="&#xE973;" Header="左括号符号" Margin="4">
+			<controls:SettingsCard.Content>
+				<StackPanel Orientation="Horizontal">
+					<TextBox x:Name="LeftParenthesisTextBox" Text="{Binding LeftParenthesis,Mode=TwoWay,Source={x:Static app:App.Config},DataType=models:MyConfig}"
+							 VerticalAlignment="Center" TextWrapping="Wrap" MaxLength="5" />
+				</StackPanel>
+			</controls:SettingsCard.Content>
+		</controls:SettingsCard>
+
+		<controls:SettingsCard Glyph="&#xE974;" Header="右括号符号" Margin="4">
+			<controls:SettingsCard.Content>
+				<StackPanel Orientation="Horizontal">
+					<TextBox x:Name="RightParenthesisTextBox" Text="{Binding RightParenthesis,Mode=TwoWay,Source={x:Static app:App.Config},DataType=models:MyConfig}"
+							 VerticalAlignment="Center" TextWrapping="Wrap" MaxLength="5" />
+				</StackPanel>
+			</controls:SettingsCard.Content>
+		</controls:SettingsCard>
+
+		<TextBlock Margin="8,32,4,4" FontWeight="SemiBold" Text="其他" />
+
+		<controls:SettingsCard Glyph="&#xE72C;" Header="恢复默认设置" Margin="4">
+			<controls:SettingsCard.Content>
+				<Button x:Name="ResetButton" Content="恢复默认设置"
+						Tapped="ResetButton_OnTapped" />
+			</controls:SettingsCard.Content>
+		</controls:SettingsCard>
+
+		<controls:SettingsCard Glyph="&#xE946;" Header="应用版本" Margin="4">
+			<controls:SettingsCard.Content>
+				<Grid>
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="Auto"/>
+						<ColumnDefinition Width="Auto"/>
+					</Grid.ColumnDefinitions>
+					<TextBlock Grid.Column="0" x:Name="VersionTextBlock" VerticalAlignment="Center" Margin="0,0,8,0"></TextBlock>
+					<Button Grid.Column="1" x:Name="UpdateButton" Content="检查更新" Tapped="UpdateButton_OnTapped"/>
+					<progRing:ProgressRing Grid.Column="1" x:Name="UpdateRing" IsActive="False" IsVisible="False" Width="20" Height="20" Foreground="{DynamicResource TextFillColorPrimary}"></progRing:ProgressRing>
+				</Grid>
+
+			</controls:SettingsCard.Content>
+		</controls:SettingsCard>
+	</StackPanel>
+</UserControl>

@@ -1,0 +1,158 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:views="clr-namespace:RomajiConverter.App.Views"
+             xmlns:controls="clr-namespace:FluentAvalonia.UI.Controls;assembly=FluentAvalonia"
+             mc:Ignorable="d"
+             x:Class="RomajiConverter.App.Views.MainView">
+	<UserControl.Styles>
+		<Style Selector="TabItem">
+			<Style.Setters>
+				<Setter Property="HorizontalContentAlignment" Value="Stretch"></Setter>
+            </Style.Setters>
+        </Style>
+        <Style Selector="TabItem:selected Border.TabBorder">
+            <Style.Setters>
+                <Setter Property="BorderBrush" Value="{DynamicResource SystemAccentColor}"></Setter>
+                <Setter Property="BorderThickness" Value="0,0,0,4"></Setter>
+            </Style.Setters>
+        </Style>
+        <Style Selector="TabItem Border.TabBorder StackPanel">
+            <Style.Setters>
+                <Setter Property="Orientation" Value="Vertical"></Setter>
+                <Setter Property="Margin" Value="8"></Setter>
+            </Style.Setters>
+        </Style>
+        <Style Selector="TabItem Border.TabBorder controls|FontIcon">
+            <Style.Setters>
+                <Setter Property="FontFamily" Value="{StaticResource SegoeIconFont}"></Setter>
+                <Setter Property="Margin" Value="0,0,0,4"></Setter>
+            </Style.Setters>
+        </Style>
+        <Style Selector="TabItem Border.TabBorder TextBlock">
+            <Style.Setters>
+                <Setter Property="FontSize" Value="14"></Setter>
+                <Setter Property="HorizontalAlignment" Value="Center"></Setter>
+            </Style.Setters>
+        </Style>
+        <Style Selector="views|InputView.Load">
+			<Style.Animations>
+                <Animation Duration="0:0:0.3" Easing="ExponentialEaseOut">
+                    <KeyFrame Cue="0%">
+                        <Setter Property="Opacity" Value="0.0"/>
+                        <Setter Property="TranslateTransform.Y" Value="120"></Setter>
+                    </KeyFrame>
+                    <KeyFrame Cue="100%">
+                        <Setter Property="Opacity" Value="1.0"/>
+                        <Setter Property="TranslateTransform.Y" Value="0"></Setter>
+                    </KeyFrame>
+                </Animation>
+            </Style.Animations>
+        </Style>
+		<Style Selector="views|EditView.Load">
+			<Style.Animations>
+				<Animation Duration="0:0:0.3" Easing="ExponentialEaseOut">
+					<KeyFrame Cue="0%">
+						<Setter Property="Opacity" Value="0.0"/>
+						<Setter Property="TranslateTransform.Y" Value="120"></Setter>
+					</KeyFrame>
+					<KeyFrame Cue="100%">
+						<Setter Property="Opacity" Value="1.0"/>
+						<Setter Property="TranslateTransform.Y" Value="0"></Setter>
+					</KeyFrame>
+				</Animation>
+			</Style.Animations>
+		</Style>
+		<Style Selector="views|OutputView.Load">
+			<Style.Animations>
+				<Animation Duration="0:0:0.3" Easing="ExponentialEaseOut">
+					<KeyFrame Cue="0%">
+						<Setter Property="Opacity" Value="0.0"/>
+						<Setter Property="TranslateTransform.Y" Value="120"></Setter>
+					</KeyFrame>
+					<KeyFrame Cue="100%">
+						<Setter Property="Opacity" Value="1.0"/>
+						<Setter Property="TranslateTransform.Y" Value="0"></Setter>
+					</KeyFrame>
+				</Animation>
+			</Style.Animations>
+		</Style>
+        <Style Selector="views|SettingsView.Load">
+            <Style.Animations>
+                <Animation Duration="0:0:0.3" Easing="ExponentialEaseOut">
+                    <KeyFrame Cue="0%">
+                        <Setter Property="Opacity" Value="0.0"/>
+                        <Setter Property="TranslateTransform.Y" Value="120"></Setter>
+                    </KeyFrame>
+                    <KeyFrame Cue="100%">
+                        <Setter Property="Opacity" Value="1.0"/>
+                        <Setter Property="TranslateTransform.Y" Value="0"></Setter>
+                    </KeyFrame>
+                </Animation>
+            </Style.Animations>
+        </Style>
+	</UserControl.Styles>
+	<Grid>
+		<TabControl x:Name="MainTabControl" TabStripPlacement="Bottom" Padding="0">
+			<TabControl.ItemsPanel>
+				<ItemsPanelTemplate>
+					<Grid Margin="0,8,0,0" ZIndex="-1">
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="*"></ColumnDefinition>
+							<ColumnDefinition Width="*"></ColumnDefinition>
+							<ColumnDefinition Width="*"></ColumnDefinition>
+							<ColumnDefinition Width="*"></ColumnDefinition>
+						</Grid.ColumnDefinitions>
+					</Grid>
+				</ItemsPanelTemplate>
+			</TabControl.ItemsPanel>
+			<TabItem Grid.Column="0">
+				<TabItem.Header>
+					<Border Classes="TabBorder">
+                        <StackPanel>
+                            <controls:FontIcon Glyph="&#xE70F;"></controls:FontIcon>
+                            <TextBlock Text="输入"></TextBlock>
+                        </StackPanel>
+					</Border>
+				</TabItem.Header>
+                <views:InputView x:Name="MainInputView" Padding="8"></views:InputView>
+			</TabItem>
+			<TabItem Grid.Column="1">
+                <TabItem.Header>
+                    <Border Classes="TabBorder">
+                        <StackPanel>
+                            <controls:FontIcon Glyph="&#xE8AC;"></controls:FontIcon>
+                            <TextBlock Text="编辑"></TextBlock>
+                        </StackPanel>
+                    </Border>
+                </TabItem.Header>
+				<views:EditView x:Name="MainEditView" Padding="8"></views:EditView>
+			</TabItem>
+			<TabItem Grid.Column="2">
+                <TabItem.Header>
+                    <Border Classes="TabBorder">
+                        <StackPanel>
+                            <controls:FontIcon Glyph="&#xF28B;"></controls:FontIcon>
+                            <TextBlock Text="结果"></TextBlock>
+                        </StackPanel>
+                    </Border>
+                </TabItem.Header>
+				<views:OutputView x:Name="MainOutputView" Padding="8"></views:OutputView>
+			</TabItem>
+			<TabItem Grid.Column="3">
+                <TabItem.Header>
+                    <Border Classes="TabBorder">
+                        <StackPanel>
+                            <controls:FontIcon Glyph="&#xE713;"></controls:FontIcon>
+                            <TextBlock Text="设置"></TextBlock>
+                        </StackPanel>
+                    </Border>
+                </TabItem.Header>
+                <ScrollViewer x:Name="SettingScrollViewer" AllowAutoHide="True" Margin="0,8,0,0">
+                    <views:SettingsView x:Name="MainSettingsView" Padding="8"></views:SettingsView>
+				</ScrollViewer>
+			</TabItem>
+		</TabControl>
+	</Grid>
+</UserControl>

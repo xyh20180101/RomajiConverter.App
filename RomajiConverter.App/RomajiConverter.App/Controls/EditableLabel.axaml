@@ -1,0 +1,40 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:controls="clr-namespace:RomajiConverter.App.Controls"
+             xmlns:models="clr-namespace:RomajiConverter.Core.Models;assembly=RomajiConverter.Core"
+             xmlns:valueConverters="clr-namespace:RomajiConverter.App.ValueConverters"
+             mc:Ignorable="d"
+             x:Name="LabelControl"
+             x:Class="RomajiConverter.App.Controls.EditableLabel"
+             x:DataType="controls:EditableLabel">
+	<UserControl.Resources>
+		<valueConverters:BorderVisibilitySettingToBorderBrushColorValueConverter x:Key="VtoC"></valueConverters:BorderVisibilitySettingToBorderBrushColorValueConverter>
+	</UserControl.Resources>
+	<Grid Margin="2,2,2,2" x:Name="Grid">
+        <Border IsVisible="{Binding !IsEdit,Mode=OneWay}" BorderThickness="1" CornerRadius="4"
+                HorizontalAlignment="Center" VerticalAlignment="Center">
+			<Border.BorderBrush>
+				<MultiBinding Converter="{StaticResource VtoC}">
+                    <Binding Path="BorderVisibilitySetting"></Binding>
+                    <Binding></Binding>
+                </MultiBinding>
+			</Border.BorderBrush>
+			<TextBlock IsVisible="{Binding !IsEdit,Mode=OneWay}" x:Name="EditLabel"
+                       Text="{Binding SelectedText.Value,Mode=OneWay}"
+                       DoubleTapped="EditLabel_OnDoubleTapped"
+                       Background="Transparent"
+                       Padding="4,4,4,4"
+                       FontSize="{Binding MyFontSize,Mode=OneWay}" />
+		</Border>
+		<!--<ComboBox IsVisible="{Binding IsEdit,Mode=OneWay}" x:Name="EditBox"
+                  HorizontalAlignment="Center" VerticalAlignment="Center"
+                  SelectedItem="{Binding SelectedText,Mode=TwoWay}"
+                  ItemsSource="{Binding ReplaceText,Mode=TwoWay}"
+                  DropDownClosed="EditBox_OnDropDownClosed"
+                  DisplayMemberBinding="{Binding Value,Mode=OneWay,DataType=models:ReplaceString}"
+                  FontSize="{Binding MyFontSize,Mode=OneWay}">
+        </ComboBox>-->
+	</Grid>
+</UserControl>

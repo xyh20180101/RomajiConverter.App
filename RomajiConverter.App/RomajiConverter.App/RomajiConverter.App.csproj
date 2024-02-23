@@ -1,0 +1,33 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
+  </PropertyGroup>
+  
+  <ItemGroup>
+    <AvaloniaResource Include="Assets\**" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <None Remove="Assets\unidic.zip" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Avalonia" Version="11.0.9" />
+    <PackageReference Include="Avalonia.Themes.Fluent" Version="11.0.9" />
+    <PackageReference Include="Avalonia.Fonts.Inter" Version="11.0.9" />
+    <PackageReference Include="Avalonia.ReactiveUI" Version="11.0.9" />
+    <!--Condition below is needed to remove Avalonia.Diagnostics package from build output in Release configuration.-->
+    <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="11.0.9" />
+    <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2" />
+    <PackageReference Include="Deadpikle.AvaloniaProgressRing" Version="0.10.4" />
+    <PackageReference Include="FluentAvaloniaUI" Version="2.0.5" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="8.0.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\RomajiConverter.Core\RomajiConverter.Core.csproj" />
+  </ItemGroup>
+</Project>

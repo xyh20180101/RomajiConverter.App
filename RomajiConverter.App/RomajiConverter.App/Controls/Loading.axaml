@@ -1,0 +1,15 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Name="Control"
+             x:Class="RomajiConverter.App.Controls.Loading"
+             HorizontalAlignment="Center"
+             VerticalAlignment="Center">
+	<Border Background="#55000000" CornerRadius="8">
+		<Grid>
+			<TextBlock Margin="16" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="{DynamicResource TextFillColorPrimary}">Loading...</TextBlock>
+		</Grid>
+	</Border>
+</UserControl>

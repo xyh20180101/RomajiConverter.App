@@ -1,0 +1,27 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:controls="clr-namespace:RomajiConverter.App.Controls"
+             mc:Ignorable="d"
+             x:Name="LabelGroupControl"
+             x:Class="RomajiConverter.App.Controls.EditableLabelGroup"
+             x:DataType="controls:EditableLabelGroup">
+	<StackPanel>
+		<controls:EditableLabel x:Name="RomajiLabel"
+                                SelectedText="{Binding SelectedRomaji,Mode=TwoWay,ElementName=LabelGroupControl}"
+                                MyFontSize="{Binding MyFontSize,Mode=OneWay,ElementName=LabelGroupControl}"
+                                ReplaceText="{Binding Unit.ReplaceRomaji,Mode=OneWay,ElementName=LabelGroupControl}"
+                                BorderVisibilitySetting="{Binding BorderVisibilitySetting,Mode=OneWay,ElementName=LabelGroupControl}">
+		</controls:EditableLabel>
+		<controls:EditableLabel x:Name="HiraganaLabel"
+                             SelectedText="{Binding SelectedHiragana,Mode=TwoWay,ElementName=LabelGroupControl}"
+                             MyFontSize="{Binding MyFontSize,Mode=OneWay,ElementName=LabelGroupControl}"
+                             ReplaceText="{Binding Unit.ReplaceHiragana,Mode=OneWay,ElementName=LabelGroupControl}"
+                             BorderVisibilitySetting="{Binding BorderVisibilitySetting,Mode=OneWay,ElementName=LabelGroupControl}">
+		</controls:EditableLabel>
+		<TextBlock x:Name="EditTextBlock" Padding="4,4,4,4" Text="{Binding Unit.Japanese,ElementName=LabelGroupControl}"
+                   HorizontalAlignment="Center" VerticalAlignment="Center"
+                   FontSize="{Binding MyFontSize,Mode=OneWay,ElementName=LabelGroupControl}" />
+	</StackPanel>
+</UserControl>

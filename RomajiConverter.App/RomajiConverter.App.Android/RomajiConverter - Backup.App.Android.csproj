@@ -1,0 +1,39 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<OutputType>Exe</OutputType>
+		<TargetFramework>net8.0-android</TargetFramework>
+		<SupportedOSPlatformVersion>21</SupportedOSPlatformVersion>
+		<Nullable>enable</Nullable>
+		<ApplicationId>com.CompanyName.RomajiConverter.App</ApplicationId>
+		<ApplicationVersion>1</ApplicationVersion>
+		<ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
+		<AndroidPackageFormat>apk</AndroidPackageFormat>
+		<AndroidEnableProfiledAot>False</AndroidEnableProfiledAot>
+	</PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+		<DebugSymbols>False</DebugSymbols>
+		<RunAOTCompilation>True</RunAOTCompilation>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<AndroidResource Include="Icon.png">
+			<Link>Resources\drawable\Icon.png</Link>
+		</AndroidResource>
+		<AndroidResource Include="Icon_splash.png">
+			<Link>Resources\drawable\Icon_splash.png</Link>
+		</AndroidResource>
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Avalonia.Android" Version="11.0.9" />
+		<PackageReference Include="Xamarin.AndroidX.Core.SplashScreen" Version="1.0.1.5" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\RomajiConverter.App\RomajiConverter.App.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="Launcher\" />
+	</ItemGroup>
+</Project>

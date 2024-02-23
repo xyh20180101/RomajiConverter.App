@@ -1,0 +1,43 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:app="clr-namespace:RomajiConverter.App"
+             xmlns:models="clr-namespace:RomajiConverter.App.Models"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="RomajiConverter.App.Views.OutputView"
+             Loaded="Control_OnLoaded"
+             Unloaded="Control_OnUnloaded">
+	<Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto" />
+			<RowDefinition Height="*" />
+			<RowDefinition Height="Auto" />
+		</Grid.RowDefinitions>
+		<Expander Margin="4" Grid.Row="0" HorizontalAlignment="Stretch"
+                  HorizontalContentAlignment="Left" Padding="16,16,16,8" Header="文本显示选项">
+			<StackPanel>
+				<WrapPanel>
+					<ToggleSwitch x:Name="SpaceCheckBox" MinWidth="100" Content="空格分隔"
+                                  IsChecked="True" />
+					<ToggleSwitch x:Name="NewLineCheckBox" MinWidth="100" Content="每句换行"
+                                  IsChecked="True" />
+					<ToggleSwitch x:Name="RomajiCheckBox" MinWidth="100" Content="罗马音"
+                                  IsChecked="True" />
+					<ToggleSwitch x:Name="HiraganaCheckBox" MinWidth="100" Content="平假名" />
+					<ToggleSwitch x:Name="JPCheckBox" MinWidth="100" Content="日文" IsChecked="True" />
+					<ToggleSwitch x:Name="KanjiHiraganaCheckBox" MinWidth="100"
+                                  Content="汉字假名标注" />
+					<ToggleSwitch x:Name="CHCheckBox" MinWidth="100" Content="中文" IsChecked="True" />
+				</WrapPanel>
+			</StackPanel>
+		</Expander>
+		<TextBox x:Name="OutputTextBox" Grid.Row="1" Margin="4" AcceptsReturn="True" TextWrapping="Wrap"
+                 ScrollViewer.VerticalScrollBarVisibility="Auto"
+                 FontSize="{Binding Source={x:Static app:App.Config}, Path=InputTextBoxFontSize,Mode=OneWay,DataType=models:MyConfig}" />
+		<Grid Grid.Row="2" Margin="4,4,8,8">
+			<Button x:Name="CopyButton" HorizontalAlignment="Right" Content="复制"
+                    Tapped="CopyButton_OnTapped" />
+		</Grid>
+	</Grid>
+</UserControl>
