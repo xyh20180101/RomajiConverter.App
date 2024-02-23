@@ -21,7 +21,12 @@
 		<controls:SettingsCard Glyph="&#xE8D2;" Header="字体" Margin="4">
 			<controls:SettingsCard.Content>
 				<ComboBox x:Name="FontFamilyComboBox">
-                </ComboBox>
+					<ComboBox.ItemTemplate>
+						<DataTemplate>
+							<TextBlock x:DataType="FontFamily" FontFamily="{Binding}" Text="{Binding Name}"/>
+						</DataTemplate>
+					</ComboBox.ItemTemplate>
+				</ComboBox>
 			</controls:SettingsCard.Content>
 		</controls:SettingsCard>
 
@@ -89,17 +94,17 @@
 			</controls:SettingsCard.Content>
 		</controls:SettingsCard>
 
-        <controls:SettingsCard Glyph="&#xE799;" Header="词间距" Margin="4">
-            <controls:SettingsCard.Content>
-                <StackPanel Orientation="Horizontal">
-                    <Slider x:Name="WordMarginSlider" Margin="0,0,8,0" IsSnapToTickEnabled="True"
+		<controls:SettingsCard Glyph="&#xE799;" Header="词间距" Margin="4">
+			<controls:SettingsCard.Content>
+				<StackPanel Orientation="Horizontal">
+					<Slider x:Name="WordMarginSlider" Margin="0,0,8,0" IsSnapToTickEnabled="True"
                             TickFrequency="0.1" Minimum="0" Maximum="1" Width="100"
                             Value="{Binding WordMargin,Mode=TwoWay,Source={x:Static app:App.Config},DataType=models:MyConfig}" />
-                    <TextBox x:Name="WordMarginTextBox" Text="{Binding Value,Mode=TwoWay,ElementName=WordMarginSlider,Converter={StaticResource DoubleToStringValueConverter}}"
+					<TextBox x:Name="WordMarginTextBox" Text="{Binding Value,Mode=TwoWay,ElementName=WordMarginSlider,Converter={StaticResource DoubleToStringValueConverter}}"
                              VerticalAlignment="Center" TextWrapping="Wrap" MaxLength="3" />
-                </StackPanel>
-            </controls:SettingsCard.Content>
-        </controls:SettingsCard>
+				</StackPanel>
+			</controls:SettingsCard.Content>
+		</controls:SettingsCard>
 
 		<controls:SettingsCard Glyph="&#xEA37;" Header="行外边距" Margin="4">
 			<controls:SettingsCard.Content>

@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using System.IO;
 using System.IO.Compression;
 using Avalonia;
+using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
 using Avalonia.Platform;
-using Avalonia.Threading;
+using FluentAvalonia.Styling;
 using Newtonsoft.Json;
 using RomajiConverter.App.Models;
 using RomajiConverter.App.Views;
@@ -35,8 +36,6 @@ public partial class App : Application
     {
         InitConfig();
         InitHelper();
-
-        Config = new MyConfig();
 
         if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
         {

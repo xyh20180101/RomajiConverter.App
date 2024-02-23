@@ -2,6 +2,7 @@
 using System.Drawing;
 using System.Runtime.CompilerServices;
 using RomajiConverter.App.Extensions;
+using RomajiConverter.App.Views;
 
 namespace RomajiConverter.App.Models;
 
@@ -56,7 +57,7 @@ public class MyConfig : INotifyPropertyChanged
         LeftParenthesis = "(";
         RightParenthesis = ")";
 
-        FontFamilyName = "NotoSansSC";
+        FontFamilyName = SettingsView.FontList[0].Name;
         FontPixelSize = 48;
         FontColor = Color.Black.ToHexString();
         BackgroundColor = Color.White.ToHexString();

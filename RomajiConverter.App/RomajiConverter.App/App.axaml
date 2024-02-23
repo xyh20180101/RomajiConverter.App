@@ -9,7 +9,7 @@
 		<FontFamily x:Key="SegoeIconFont">avares://RomajiConverter.App/Assets/Fonts/#Segoe Fluent Icons</FontFamily>
 	</Application.Resources>
 	<Application.Styles>
-		<styling:FluentAvaloniaTheme PreferUserAccentColor="True" PreferSystemTheme="True" UseSystemFontOnWindows="False"/>
+		<styling:FluentAvaloniaTheme PreferUserAccentColor="True" PreferSystemTheme="True"/>
 		<StyleInclude Source="avares://RomajiConverter.App/Controls/SettingsCard.axaml" />
 		<StyleInclude Source="avares://AvaloniaProgressRing/Styles/ProgressRing.xaml"/>
 	</Application.Styles>

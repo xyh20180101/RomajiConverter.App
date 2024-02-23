@@ -12,13 +12,24 @@ using Newtonsoft.Json.Linq;
 using System.Net.Http;
 using System.Threading;
 using System;
+using System.Collections.Generic;
 using Microsoft.Extensions.DependencyInjection;
 using System.Runtime.InteropServices;
+using Avalonia.Media;
+using Avalonia.Platform;
+using RomajiConverter.App.ValueConverters;
+using SkiaSharp;
 
 namespace RomajiConverter.App.Views;
 
 public partial class SettingsView : UserControl
 {
+    public static List<FontFamily> FontList { get; set; } = new List<FontFamily>
+    {
+        new FontFamily(new Uri("avares://RomajiConverter.App/Assets/Fonts/Noto Sans SC"),"Noto Sans SC"),
+        new FontFamily(new Uri("avares://RomajiConverter.App/Assets/Fonts/Noto Serif SC"),"Noto Serif SC")
+    };
+
     public SettingsView()
     {
         InitializeComponent();
@@ -35,14 +46,17 @@ public partial class SettingsView : UserControl
     /// </summary>
     private void InitFontFamily()
     {
-        FontFamilyComboBox.Items.Add("NotoSansSC");
-        FontFamilyComboBox.Items.Add("NotoSerifSC");
+        foreach (var font in FontList)
+        {
+            FontFamilyComboBox.Items.Add(font);
+        }
 
         FontFamilyComboBox.Bind(ComboBox.SelectedValueProperty, new Binding
         {
             Mode = BindingMode.TwoWay,
             Source = App.Config,
-            Path = nameof(App.Config.FontFamilyName)
+            Path = nameof(App.Config.FontFamilyName),
+            Converter = new StringToFontFamilyValueConverter()
         });
     }
 

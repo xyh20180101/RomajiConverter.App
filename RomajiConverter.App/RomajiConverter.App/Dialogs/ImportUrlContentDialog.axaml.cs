@@ -1,24 +1,20 @@
-using Avalonia.Controls;
-using Avalonia.Styling;
-using FluentAvalonia.UI.Controls;
-using RomajiConverter.App.Helpers.LyricsHelpers;
-using RomajiConverter.App.Models;
 using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Web;
 using Avalonia;
-using Avalonia.Input;
-using Avalonia.Interactivity;
+using Avalonia.Controls;
+using Avalonia.Styling;
+using FluentAvalonia.UI.Controls;
+using RomajiConverter.App.Helpers.LyricsHelpers;
+using RomajiConverter.App.Models;
 
 namespace RomajiConverter.App.Dialogs;
 
 public partial class ImportUrlContentDialog : ContentDialog, IStyleable
 {
     private string _errorText;
-
-    Type IStyleable.StyleKey => typeof(ContentDialog);
 
     public ImportUrlContentDialog()
     {
@@ -42,6 +38,8 @@ public partial class ImportUrlContentDialog : ContentDialog, IStyleable
     }
 
     public List<MultilingualLrc> LrcResult { get; set; } = new();
+
+    Type IStyleable.StyleKey => typeof(ContentDialog);
 
     private void OnClosing(ContentDialog sender, ContentDialogClosingEventArgs args)
     {
