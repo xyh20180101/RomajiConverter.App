@@ -33,6 +33,7 @@
 			</StackPanel>
 		</Expander>
 		<TextBox x:Name="OutputTextBox" Grid.Row="1" Margin="4" AcceptsReturn="True" TextWrapping="Wrap"
+                 IsReadOnly="{Binding Source={x:Static app:App.Config}, Path=IsOutputTextBoxReadOnly,Mode=OneWay,DataType=models:MyConfig}"
                  ScrollViewer.VerticalScrollBarVisibility="Auto"
                  FontSize="{Binding Source={x:Static app:App.Config}, Path=InputTextBoxFontSize,Mode=OneWay,DataType=models:MyConfig}" />
 		<Grid Grid.Row="2" Margin="4,4,8,8">

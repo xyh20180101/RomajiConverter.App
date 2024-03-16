@@ -27,6 +27,7 @@ public class MyConfig : INotifyPropertyChanged
     private int _windowsHeight;
     private int _windowsWidth;
     private float _wordMargin;
+    private bool _isOutputTextBoxReadOnly;
 
     /// <summary>
     /// 默认设置
@@ -56,6 +57,7 @@ public class MyConfig : INotifyPropertyChanged
         IsOpenExplorerAfterSaveImage = true;
         LeftParenthesis = "(";
         RightParenthesis = ")";
+        IsOutputTextBoxReadOnly = true;
 
         FontFamilyName = SettingsView.FontList[0].Name;
         FontPixelSize = 48;
@@ -181,6 +183,17 @@ public class MyConfig : INotifyPropertyChanged
         {
             if (value == _rightParenthesis) return;
             _rightParenthesis = value;
+            OnPropertyChanged();
+        }
+    }
+
+    public bool IsOutputTextBoxReadOnly
+    {
+        get => _isOutputTextBoxReadOnly;
+        set
+        {
+            if (value == _isOutputTextBoxReadOnly) return;
+            _isOutputTextBoxReadOnly = value;
             OnPropertyChanged();
         }
     }

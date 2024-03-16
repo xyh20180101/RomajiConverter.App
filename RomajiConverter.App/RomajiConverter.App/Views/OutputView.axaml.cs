@@ -1,14 +1,11 @@
-using Avalonia;
-using Avalonia.Controls;
-using Avalonia.Interactivity;
-using Avalonia.Markup.Xaml;
-using FluentAvalonia.UI.Data;
-using RomajiConverter.App.Extensions;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System;
+using Avalonia.Controls;
 using Avalonia.Input;
+using Avalonia.Interactivity;
+using RomajiConverter.App.Extensions;
 
 namespace RomajiConverter.App.Views;
 

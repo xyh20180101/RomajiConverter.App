@@ -1,32 +1,24 @@
-using Avalonia;
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
+using System.Linq;
+using System.Runtime.InteropServices;
+using System.Text;
 using Avalonia.Controls;
-using Avalonia.Data.Core;
 using Avalonia.Data;
-using Avalonia.Markup.Xaml;
-using Avalonia.Media;
-using RomajiConverter.App.ValueConverters;
-using System.Resources;
+using Avalonia.Input;
 using Avalonia.Interactivity;
+using Avalonia.Media;
+using Avalonia.Platform.Storage;
+using Newtonsoft.Json;
 using RomajiConverter.App.Controls;
 using RomajiConverter.App.Enums;
 using RomajiConverter.App.Extensions;
-using System.Linq;
-using System;
-using System.Diagnostics;
-using System.Threading.Tasks;
-using Avalonia.Input;
-using Avalonia.Threading;
-using FluentAvalonia.UI.Controls;
-using Avalonia.Controls.Shapes;
-using System.Collections.Generic;
-using Avalonia.Platform.Storage;
-using System.IO;
-using System.Text;
-using Newtonsoft.Json;
-using RomajiConverter.Core.Models;
 using RomajiConverter.App.Helpers;
+using RomajiConverter.App.ValueConverters;
+using RomajiConverter.Core.Models;
 using SkiaSharp;
-using System.Runtime.InteropServices;
 
 namespace RomajiConverter.App.Views;
 
@@ -48,6 +40,15 @@ public partial class EditView : UserControl
     };
 
     private static readonly SolidColorBrush SeparatorBackground = new(Color.FromArgb(170, 170, 170, 170));
+
+    private static readonly IReadOnlyList<FilePickerFileType> _jsonFilePickerFileTypes = new List<FilePickerFileType>
+    {
+        new("*.json")
+        {
+            Patterns = new[] { "*.json" },
+            MimeTypes = new[] { "application/json" }
+        }
+    };
 
     public EditView()
     {
@@ -71,7 +72,8 @@ public partial class EditView : UserControl
     /// <summary>
     /// ToggleSwitch¿Ø¼þ×´Ì¬
     /// </summary>
-    public (bool Romaji, bool Hiragana, bool IsOnlyShowKanji) ToggleSwitchState => (EditRomajiCheckBox.IsChecked.ToBool(),
+    public (bool Romaji, bool Hiragana, bool IsOnlyShowKanji) ToggleSwitchState => (
+        EditRomajiCheckBox.IsChecked.ToBool(),
         EditHiraganaCheckBox.IsChecked.ToBool(), IsOnlyShowKanjiCheckBox.IsChecked.ToBool());
 
     /// <summary>
@@ -120,6 +122,7 @@ public partial class EditView : UserControl
                 {
                     group.HiraganaVisibility = HiraganaVisibility.Collapsed;
                 }
+
                 panel.Children.Add(group);
             }
 
@@ -149,7 +152,7 @@ public partial class EditView : UserControl
     private void EditToggleSwitch_OnIsCheckedChanged(object? sender, RoutedEventArgs e)
     {
         var senderName = ((ToggleSwitch)sender).Name;
-        foreach (object children in EditPanel.Items)
+        foreach (var children in EditPanel.Items)
         {
             WrapPanel wrapPanel;
             if (children.GetType() == typeof(WrapPanel))
@@ -198,7 +201,7 @@ public partial class EditView : UserControl
     /// <param name="e"></param>
     private void BorderVisibilityComboBoxOnSelectionChanged(object? sender, SelectionChangedEventArgs e)
     {
-        foreach (object children in EditPanel.Items)
+        foreach (var children in EditPanel.Items)
         {
             WrapPanel wrapPanel;
             if (children.GetType() == typeof(WrapPanel))
@@ -232,15 +235,6 @@ public partial class EditView : UserControl
     {
         Classes.Remove("Load");
     }
-
-    private static IReadOnlyList<FilePickerFileType> _jsonFilePickerFileTypes = new List<FilePickerFileType>
-    {
-        new("*.json")
-        {
-            Patterns = new[] { "*.json" },
-            MimeTypes = new[] { "application/json" }
-        }
-    };
 
     private async void ReadButton_OnClick(object? sender, RoutedEventArgs e)
     {

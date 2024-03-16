@@ -1,35 +1,25 @@
-using Avalonia;
-using Avalonia.Controls;
-using Avalonia.Markup.Xaml;
+using System;
+using System.Collections.Generic;
+using System.Net.Http;
 using System.Reflection;
+using System.Runtime.InteropServices;
+using System.Threading;
+using Avalonia.Controls;
+using Avalonia.Controls.Primitives;
 using Avalonia.Data;
 using Avalonia.Input;
 using Avalonia.Interactivity;
-using RomajiConverter.App.Extensions;
-using FluentAvalonia.UI.Controls;
-using System.Resources;
-using Newtonsoft.Json.Linq;
-using System.Net.Http;
-using System.Threading;
-using System;
-using System.Collections.Generic;
-using Microsoft.Extensions.DependencyInjection;
-using System.Runtime.InteropServices;
 using Avalonia.Media;
-using Avalonia.Platform;
+using FluentAvalonia.UI.Controls;
+using Microsoft.Extensions.DependencyInjection;
+using Newtonsoft.Json.Linq;
+using RomajiConverter.App.Extensions;
 using RomajiConverter.App.ValueConverters;
-using SkiaSharp;
 
 namespace RomajiConverter.App.Views;
 
 public partial class SettingsView : UserControl
 {
-    public static List<FontFamily> FontList { get; set; } = new List<FontFamily>
-    {
-        new FontFamily(new Uri("avares://RomajiConverter.App/Assets/Fonts/Noto Sans SC"),"Noto Sans SC"),
-        new FontFamily(new Uri("avares://RomajiConverter.App/Assets/Fonts/Noto Serif SC"),"Noto Serif SC")
-    };
-
     public SettingsView()
     {
         InitializeComponent();
@@ -41,17 +31,20 @@ public partial class SettingsView : UserControl
             IsOpenExplorerAfterSaveImageSettingsCard.IsVisible = false;
     }
 
+    public static List<FontFamily> FontList { get; set; } = new()
+    {
+        new(new Uri("avares://RomajiConverter.App/Assets/Fonts/Noto Sans SC"), "Noto Sans SC"),
+        new(new Uri("avares://RomajiConverter.App/Assets/Fonts/Noto Serif SC"), "Noto Serif SC")
+    };
+
     /// <summary>
     /// 初始化字体下拉框
     /// </summary>
     private void InitFontFamily()
     {
-        foreach (var font in FontList)
-        {
-            FontFamilyComboBox.Items.Add(font);
-        }
+        foreach (var font in FontList) FontFamilyComboBox.Items.Add(font);
 
-        FontFamilyComboBox.Bind(ComboBox.SelectedValueProperty, new Binding
+        FontFamilyComboBox.Bind(SelectingItemsControl.SelectedValueProperty, new Binding
         {
             Mode = BindingMode.TwoWay,
             Source = App.Config,
@@ -121,8 +114,11 @@ public partial class SettingsView : UserControl
             var cancellationTokenSource = new CancellationTokenSource(10000);
             httpClient.DefaultRequestHeaders.Add("Accept", "application/vnd.github+json");
             httpClient.DefaultRequestHeaders.Add("User-Agent", "RomajiConverter.WinUI Client");
-            var httpResponseMessage = await httpClient.GetAsync(new Uri("https://api.github.com/repos/xyh20180101/RomajiConverter.App/releases/latest"), cancellationTokenSource.Token);
-            var data = JObject.Parse(await httpResponseMessage.Content.ReadAsStringAsync(cancellationTokenSource.Token));
+            var httpResponseMessage = await httpClient.GetAsync(
+                new Uri("https://api.github.com/repos/xyh20180101/RomajiConverter.App/releases/latest"),
+                cancellationTokenSource.Token);
+            var data = JObject.Parse(
+                await httpResponseMessage.Content.ReadAsStringAsync(cancellationTokenSource.Token));
 
             UpdateRing.IsActive = false;
             UpdateRing.IsVisible = false;
@@ -144,7 +140,8 @@ public partial class SettingsView : UserControl
 
                 var launcher = App.ServiceProvider.GetRequiredService<Launcher.Launcher>();
                 if (result == ContentDialogResult.Primary)
-                    await launcher.LaunchUriAsync(new Uri("https://github.com/xyh20180101/RomajiConverter.App/releases"));
+                    await launcher.LaunchUriAsync(
+                        new Uri("https://github.com/xyh20180101/RomajiConverter.App/releases"));
             }
             else
             {
@@ -173,5 +170,11 @@ public partial class SettingsView : UserControl
             UpdateRing.IsVisible = false;
             UpdateButton.Opacity = 1;
         }
+    }
+
+    private async void InputElement_OnTapped(object? sender, TappedEventArgs e)
+    {
+        var launcher = App.ServiceProvider.GetRequiredService<Launcher.Launcher>();
+        await launcher.LaunchUriAsync(new Uri("https://github.com/xyh20180101/RomajiConverter.App"));
     }
 }

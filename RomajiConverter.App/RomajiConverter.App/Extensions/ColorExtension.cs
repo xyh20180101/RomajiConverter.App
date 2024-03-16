@@ -9,11 +9,6 @@ public static class ColorExtension
         return "#" + color.A.ToString("X2") + color.R.ToString("X2") + color.G.ToString("X2") + color.B.ToString("X2");
     }
 
-    public static Color ToDrawingColor(this string hexString)
-    {
-        return (Color)new ColorConverter().ConvertFromString(hexString);
-    }
-
     public static Avalonia.Media.Color ToAvaloniaColor(this string hexString)
     {
         return Avalonia.Media.Color.Parse(hexString);

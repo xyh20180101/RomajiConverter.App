@@ -5,6 +5,7 @@ using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using Avalonia;
 using Avalonia.Controls;
+using Avalonia.Controls.Primitives;
 using Avalonia.Data;
 using Avalonia.Input;
 using Avalonia.Layout;
@@ -31,6 +32,8 @@ public partial class EditableLabel : UserControl, INotifyPropertyChanged
             BorderVisibilitySetting.Hidden);
 
     private bool _isEdit;
+
+    private ComboBox _doubleTappedComboBox;
 
     public EditableLabel()
     {
@@ -81,32 +84,31 @@ public partial class EditableLabel : UserControl, INotifyPropertyChanged
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
 
-    private ComboBox Cb;
-
     public async void ToEdit()
     {
-        Cb = new ComboBox
+        _doubleTappedComboBox = new ComboBox
         {
             IsVisible = false,
             HorizontalAlignment = HorizontalAlignment.Center,
             VerticalAlignment = VerticalAlignment.Center,
             ItemsSource = ReplaceText,
             DisplayMemberBinding = new Binding("Value", BindingMode.OneWay),
-            FontSize = MyFontSize,
-            IsDropDownOpen = true
+            FontSize = MyFontSize
         };
-        Cb.Bind(ComboBox.SelectedItemProperty, new Binding
+        _doubleTappedComboBox.Bind(SelectingItemsControl.SelectedItemProperty, new Binding
         {
             Mode = BindingMode.TwoWay,
             Source = this,
             Path = nameof(SelectedText)
         });
-        Cb.DropDownClosed += EditBox_OnDropDownClosed;
+        _doubleTappedComboBox.DropDownClosed += EditBox_OnDropDownClosed;
 
-        Grid.Children.Add(Cb);
+        Grid.Children.Add(_doubleTappedComboBox);
 
         IsEdit = true;
-        Cb.IsVisible = true;
+        _doubleTappedComboBox.IsVisible = true;
+        await Task.Delay(20);
+        _doubleTappedComboBox.IsDropDownOpen = true;
     }
 
     public void ToSave()
@@ -123,14 +125,14 @@ public partial class EditableLabel : UserControl, INotifyPropertyChanged
     private void EditBox_OnDropDownClosed(object? sender, EventArgs e)
     {
         ToSave();
-        Grid.Children.Remove(Cb);
+        Grid.Children.Remove(_doubleTappedComboBox);
     }
 
     public void Destroy()
     {
         EditLabel.DoubleTapped -= EditLabel_OnDoubleTapped;
-        if (Cb != null)
-            Cb.DropDownClosed -= EditBox_OnDropDownClosed;
+        if (_doubleTappedComboBox != null)
+            _doubleTappedComboBox.DropDownClosed -= EditBox_OnDropDownClosed;
         ClearValue(SelectedTextProperty);
         ClearValue(ReplaceTextProperty);
         ClearValue(MyFontSizeProperty);

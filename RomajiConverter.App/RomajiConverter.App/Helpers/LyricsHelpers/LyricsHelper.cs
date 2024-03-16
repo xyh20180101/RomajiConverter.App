@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using RomajiConverter.App.Models;
 
@@ -13,10 +12,10 @@ public class LyricsHelper
         var chnLrc = LrcParser.Parse(chnLrcText);
 
         var lrcList = jpnLrc.Select(line => new MultilingualLrc
-        { Time = line.Time, JLrc = line.Text }).ToList();
+            { Time = line.Time, JLrc = line.Text }).ToList();
         foreach (var line in chnLrc)
-            foreach (var lrc in lrcList.Where(lrc => lrc.Time == line.Time))
-                lrc.CLrc = line.Text;
+        foreach (var lrc in lrcList.Where(lrc => lrc.Time == line.Time))
+            lrc.CLrc = line.Text;
 
         return lrcList;
     }

@@ -7,7 +7,7 @@
              mc:Ignorable="d"
              x:Class="RomajiConverter.App.Views.MainView"
              Loaded="Control_OnLoaded">
-	<UserControl.Styles>
+    <UserControl.Styles>
 		<Style Selector="TabItem">
 			<Style.Setters>
 				<Setter Property="HorizontalContentAlignment" Value="Stretch"></Setter>

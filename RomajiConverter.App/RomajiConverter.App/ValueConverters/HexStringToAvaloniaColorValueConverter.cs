@@ -10,7 +10,7 @@ public class HexStringToAvaloniaColorValueConverter : IValueConverter
 {
     public object? Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
     {
-        if(value == null) return null;
+        if (value == null) return null;
         return ((string)value).ToAvaloniaColor();
     }
 

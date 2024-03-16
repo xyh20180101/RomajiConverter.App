@@ -28,13 +28,5 @@
                        Padding="4,4,4,4"
                        FontSize="{Binding MyFontSize,Mode=OneWay}" />
 		</Border>
-		<!--<ComboBox IsVisible="{Binding IsEdit,Mode=OneWay}" x:Name="EditBox"
-                  HorizontalAlignment="Center" VerticalAlignment="Center"
-                  SelectedItem="{Binding SelectedText,Mode=TwoWay}"
-                  ItemsSource="{Binding ReplaceText,Mode=TwoWay}"
-                  DropDownClosed="EditBox_OnDropDownClosed"
-                  DisplayMemberBinding="{Binding Value,Mode=OneWay,DataType=models:ReplaceString}"
-                  FontSize="{Binding MyFontSize,Mode=OneWay}">
-        </ComboBox>-->
 	</Grid>
 </UserControl>

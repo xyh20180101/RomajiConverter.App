@@ -10,7 +10,8 @@
                 Title="通过链接导入歌词"
                 PrimaryButtonText="确认"
                 CloseButtonText="取消"
-                DefaultButton="Primary">
+                DefaultButton="Primary"
+                Loaded="Control_OnLoaded">
     <StackPanel>
         <TextBlock Margin="0,8" Text="目前支持网易云、QQ音乐、酷狗" />
         <TextBlock Margin="0,8" Text="歌曲分享链接：" />

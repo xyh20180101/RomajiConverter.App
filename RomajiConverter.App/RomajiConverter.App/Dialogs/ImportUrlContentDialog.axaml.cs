@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 using System.Web;
 using Avalonia;
 using Avalonia.Controls;
+using Avalonia.Controls.Platform;
+using Avalonia.Interactivity;
 using Avalonia.Styling;
 using FluentAvalonia.UI.Controls;
 using RomajiConverter.App.Helpers.LyricsHelpers;
@@ -40,6 +42,16 @@ public partial class ImportUrlContentDialog : ContentDialog, IStyleable
     public List<MultilingualLrc> LrcResult { get; set; } = new();
 
     Type IStyleable.StyleKey => typeof(ContentDialog);
+
+    private void Control_OnLoaded(object? sender, RoutedEventArgs e)
+    {
+        TopLevel.GetTopLevel(this).InputPane.StateChanged += InputPaneOnStateChanged;
+    }
+
+    private void InputPaneOnStateChanged(object? sender, InputPaneStateEventArgs e)
+    {
+        Margin = new Thickness(0, 0, 0, e.EndRect.Height);
+    }
 
     private void OnClosing(ContentDialog sender, ContentDialogClosingEventArgs args)
     {
@@ -96,7 +108,7 @@ public partial class ImportUrlContentDialog : ContentDialog, IStyleable
 
     private async void UrlTextBox_OnAttachedToVisualTree(object? sender, VisualTreeAttachmentEventArgs e)
     {
-        await Task.Delay(20);
-        var b = UrlTextBox.Focus();
+        await Task.Delay(50);
+        UrlTextBox.Focus();
     }
 }

@@ -1,21 +1,11 @@
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Avalonia;
-using Avalonia.Animation;
 using Avalonia.Controls;
-using Avalonia.Input;
 using Avalonia.Interactivity;
-using Avalonia.Layout;
-using Avalonia.Markup.Xaml;
-using Avalonia.Media;
 using Avalonia.Threading;
-using FluentAvalonia.UI.Controls;
-using RomajiConverter.App.Controls;
 using RomajiConverter.App.Dialogs;
-using RomajiConverter.App.Extensions;
 using RomajiConverter.App.Models;
 using RomajiConverter.Core.Helpers;
 
@@ -53,10 +43,7 @@ public partial class InputView : UserControl
             isAutoVariant = AutoVariantCheckBox.IsChecked.Value;
         });
 
-        await Task.Run(() =>
-        {
-            App.ConvertedLineList = RomajiHelper.ToRomaji(inputText, isAutoVariant);
-        });
+        await Task.Run(() => { App.ConvertedLineList = RomajiHelper.ToRomaji(inputText, isAutoVariant); });
 
         if (App.Config.IsDetailMode)
         {
@@ -68,6 +55,7 @@ public partial class InputView : UserControl
             MainOutputView.RenderText();
             MainTabControl.SelectedItem = 2;
         }
+
         Loading.IsVisible = false;
     }
 

@@ -11,7 +11,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RomajiConverter.App.Desktop
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RomajiConverter.App.iOS", "RomajiConverter.App\RomajiConverter.App.iOS\RomajiConverter.App.iOS.csproj", "{ED890774-B1E8-40C8-925B-A831E7C57BE0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RomajiConverter.Core", "RomajiConverter.Core\RomajiConverter.Core.csproj", "{1CECAC25-9CEB-4979-A65F-F8BB44A6FAE6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RomajiConverter.Core", "RomajiConverter.Core\RomajiConverter.Core.csproj", "{1CECAC25-9CEB-4979-A65F-F8BB44A6FAE6}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "解决方案项", "解决方案项", "{EAB33C34-17E5-40F6-8789-25E7D9D61960}"
+	ProjectSection(SolutionItems) = preProject
+		version.props = version.props
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

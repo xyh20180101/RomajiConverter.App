@@ -5,8 +5,8 @@
 		<SupportedOSPlatformVersion>21</SupportedOSPlatformVersion>
 		<Nullable>enable</Nullable>
 		<ApplicationId>com.CompanyName.RomajiConverter.App</ApplicationId>
-		<ApplicationVersion>1</ApplicationVersion>
-		<ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
+		<ApplicationVersion>$(VersionNum)</ApplicationVersion>
+		<ApplicationDisplayVersion>$(Version)</ApplicationDisplayVersion>
 		<AndroidPackageFormat>apk</AndroidPackageFormat>
 		<AndroidEnableProfiledAot>False</AndroidEnableProfiledAot>
 	</PropertyGroup>
@@ -14,6 +14,8 @@
 		<DebugSymbols>False</DebugSymbols>
 		<RunAOTCompilation>True</RunAOTCompilation>
 	</PropertyGroup>
+
+	<Import Project="..\..\version.props" />
 
 	<ItemGroup>
 		<AndroidResource Include="Icon.png">
@@ -25,7 +27,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Avalonia.Android" Version="11.0.9" />
+		<PackageReference Include="Avalonia.Android" Version="11.2.999-cibuild0046034-beta" />
 		<PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="8.0.0" />
 		<PackageReference Include="Xamarin.AndroidX.Core.SplashScreen" Version="1.0.1.5" />
 		<PackageReference Include="Xamarin.Essentials" Version="1.8.1" />

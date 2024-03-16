@@ -1,7 +1,5 @@
 using Avalonia;
 using Avalonia.Controls.Primitives;
-using Avalonia.Media;
-using FluentAvalonia.UI.Controls;
 
 namespace RomajiConverter.App.Controls;
 
@@ -9,15 +7,15 @@ public class SettingsCard : TemplatedControl
 {
     public static readonly StyledProperty<string> HeaderProperty =
         AvaloniaProperty.Register<SettingsCard, string>(
-            nameof(Header), null);
+            nameof(Header));
 
     public static readonly StyledProperty<object> ContentProperty =
         AvaloniaProperty.Register<SettingsCard, object>(
-            nameof(Content), null);
+            nameof(Content));
 
     public static readonly StyledProperty<string> GlyphProperty =
         AvaloniaProperty.Register<SettingsCard, string>(
-            nameof(Glyph), null);
+            nameof(Glyph));
 
     public string Header
     {
@@ -36,6 +34,4 @@ public class SettingsCard : TemplatedControl
         get => GetValue(GlyphProperty);
         set => SetValue(GlyphProperty, value);
     }
-
-    public BoxShadows BoxShadowEffect = new BoxShadows(new BoxShadow());
 }

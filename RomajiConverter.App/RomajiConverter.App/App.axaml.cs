@@ -3,12 +3,10 @@ using System.Collections.Generic;
 using System.IO;
 using System.IO.Compression;
 using Avalonia;
-using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
 using Avalonia.Platform;
-using FluentAvalonia.Styling;
 using Newtonsoft.Json;
 using RomajiConverter.App.Models;
 using RomajiConverter.App.Views;
@@ -17,11 +15,11 @@ using RomajiConverter.Core.Models;
 
 namespace RomajiConverter.App;
 
-public partial class App : Application
+public class App : Application
 {
     public const string ConfigFileName = "config.json";
 
-    public static MyConfig Config = null;
+    public static MyConfig Config;
 
     public static List<ConvertedLine> ConvertedLineList = new();
 
