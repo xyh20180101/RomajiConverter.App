@@ -2,7 +2,7 @@
 
 使用Avalonia框架开发的跨平台罗马音转换器
 
-该项目只针对Android平台进行开发与调试，也只有Android平台的Release，对于其他平台：
+**该项目只针对Android平台进行开发与调试，也只有Android平台的Release**，对于其他平台：
 
 Windouws 10/11：已有原生项目[RomajiConverter.WinUI](https://github.com/xyh20180101/RomajiConverter.WinUI)
 
