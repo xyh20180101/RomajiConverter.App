@@ -36,8 +36,8 @@ public partial class EditableLabelGroup : UserControl, INotifyPropertyChanged
         InitializeComponent();
         Unit = unit;
         MyFontSize = 14;
-        SelectedRomaji = Unit.ReplaceRomaji[0];
-        SelectedHiragana = Unit.ReplaceHiragana[0];
+        SelectedRomaji = Unit.ReplaceRomaji.First(p => p.Id == unit.SelectId);
+        SelectedHiragana = Unit.ReplaceHiragana.First(p => p.Id == unit.SelectId);
         BorderVisibilitySetting = BorderVisibilitySetting.Hidden;
     }
 
@@ -128,6 +128,7 @@ public partial class EditableLabelGroup : UserControl, INotifyPropertyChanged
             if (_selectedRomaji.IsSystem)
                 SelectedHiragana = Unit.ReplaceHiragana.First(p => p.Id == _selectedRomaji.Id);
             Unit.Romaji = _selectedRomaji.Value;
+            Unit.SelectId = _selectedRomaji.Id;
             OnPropertyChanged();
         }
     }
@@ -142,6 +143,7 @@ public partial class EditableLabelGroup : UserControl, INotifyPropertyChanged
             if (_selectedHiragana.IsSystem)
                 SelectedRomaji = Unit.ReplaceRomaji.First(p => p.Id == _selectedHiragana.Id);
             Unit.Hiragana = _selectedHiragana.Value;
+            Unit.SelectId = _selectedHiragana.Id;
             OnPropertyChanged();
         }
     }

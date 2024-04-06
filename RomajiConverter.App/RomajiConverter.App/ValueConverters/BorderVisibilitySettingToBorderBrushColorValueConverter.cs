@@ -14,7 +14,7 @@ public class BorderVisibilitySettingToBorderBrushColorValueConverter : IMultiVal
 {
     public object? Convert(IList<object?> values, Type targetType, object? parameter, CultureInfo culture)
     {
-        if (values.Any(x => x is UnsetValueType)) return new SolidColorBrush(Color.FromArgb(0, 0, 0, 0));
+        if (values.Any(x => x is UnsetValueType || x == null)) return new SolidColorBrush(Color.FromArgb(0, 0, 0, 0));
 
         var borderVisibilitySetting = (BorderVisibilitySetting)values[0];
         var isEdit = ((EditableLabel)values[1]).IsEdit;
