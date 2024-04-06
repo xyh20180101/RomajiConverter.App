@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
+using System.Threading.Tasks;
 using Avalonia.Controls;
 using Avalonia.Data;
 using Avalonia.Input;
@@ -243,17 +244,35 @@ public partial class EditView : UserControl
         var files = await topLevel.StorageProvider.OpenFilePickerAsync(new FilePickerOpenOptions
         {
             Title = "打开歌词文件",
-            AllowMultiple = false,
-            FileTypeFilter = _jsonFilePickerFileTypes
+            AllowMultiple = false
         });
 
         if (files.Count >= 1)
         {
             Loading.IsVisible = true;
-            await using var fs = await files[0].OpenReadAsync();
-            using var sr = new StreamReader(fs, Encoding.UTF8);
-            var json = await sr.ReadToEndAsync();
-            App.ConvertedLineList = JsonConvert.DeserializeObject<List<ConvertedLine>>(json);
+            
+            //等avalonia支持全局异常或者通用消息提示了记得改掉这个很蠢的实现
+            try
+            {
+                await using var fs = await files[0].OpenReadAsync();
+
+                //大于5M的一般不会是歌词文件,跳出防止读大文件
+                if (fs.Length > 5 * 1024 * 1024)
+                    throw new Exception();
+
+                using var sr = new StreamReader(fs, Encoding.UTF8);
+                var json = await sr.ReadToEndAsync();
+                App.ConvertedLineList = JsonConvert.DeserializeObject<List<ConvertedLine>>(json);
+            }
+            catch (Exception exception)
+            {
+                Loading.Text = "不是正确的歌词json文件";
+                await Task.Delay(2000);
+                Loading.IsVisible = false;
+                Loading.Text = "Loading...";
+                return;
+            }
+            
             RenderEditPanel();
             Loading.IsVisible = false;
         }
