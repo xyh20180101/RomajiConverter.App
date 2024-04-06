@@ -1,6 +1,6 @@
 <Project>
 	<PropertyGroup>
-		<Version>0.1.0</Version>
-		<VersionNum>10000</VersionNum>
+		<Version>0.1.1</Version>
+		<VersionNum>10001</VersionNum>
 	</PropertyGroup>
 </Project>
